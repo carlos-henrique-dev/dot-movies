@@ -72,12 +72,12 @@ export default {
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.5);
   i {
     cursor: pointer;
-    font-size: 50px;
-    color: #6558f5;
+    font-size: 60px;
+    color: #f03434;
     transition: transform 0.3s;
   }
   i:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
 }
 .movies-container {
