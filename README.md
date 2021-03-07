@@ -4,7 +4,7 @@
 Projeto desenvolvido em ``Vue.js`` como teste para [DOT digital group](https://dotgroup.com.br/).
 
 ## One netlify
-[Clique aqui para acessar o projeto no netlify](https://agitated-joliot-2b1215.netlify.app)
+[Clique aqui para acessar o projeto no netlify](https://604444d273cb391eba4e85ae--wonderful-meitner-b75607.netlify.app/)
 
 ## Configurações iniciais
 Para poder acessar a API do TMDB é necessário uma ``api_key``. Esta chave pode ser obtida no [site do TMDB](https://www.themoviedb.org/) em ``Profile > Settings > API`` <br>
