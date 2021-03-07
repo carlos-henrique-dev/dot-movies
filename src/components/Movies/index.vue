@@ -1,13 +1,16 @@
 <template>
+  <Spinner v-show="isLoading" />
   <div class="movies-container">
     <div v-for="movie in allMovies || []" :key="movie.id">
       <MovieCard :movie="movie" />
     </div>
   </div>
-  <Spinner v-show="isLoading" />
   <div class="no-movie" v-show="!isLoading && allMovies.length === 0">
     <span>Nenhum filme encontrado </span>
     <i class="fas fa-frown"></i>
+  </div>
+  <div v-show="showBackToTop" class="back-to-top" @click="scrollTop">
+    <i class="fas fa-arrow-alt-circle-up"></i>
   </div>
 </template>
 
@@ -15,16 +18,27 @@
 import { mapActions, mapGetters } from "vuex";
 import MovieCard from "./MovieCard";
 import Spinner from "../shared/Spinner";
+
 export default {
   name: "Movies",
   components: { MovieCard, Spinner },
   computed: mapGetters(["cartItemsAmount"]),
   methods: {
     ...mapActions(["getMovies", "getGenres"]),
+    scrollTop() {
+      window.scrollTo(0, 0);
+    },
     scroll() {
       window.onscroll = () => {
+        if (window.scrollY === 0) {
+          this.showBackToTop = false;
+        }
+        if (window.scrollY > 300) {
+          this.showBackToTop = true;
+        }
         if (
-          window.innerHeight + window.scrollY >= document.body.scrollHeight &&
+          window.innerHeight + window.scrollY + 70 >=
+            document.body.scrollHeight &&
           !this.$store.getters.filterOn
         ) {
           this.getMovies();
@@ -33,7 +47,11 @@ export default {
     },
   },
   computed: mapGetters(["allMovies", "isLoading"]),
-
+  data() {
+    return {
+      showBackToTop: false,
+    };
+  },
   created() {
     this.getGenres();
     this.getMovies();
@@ -45,6 +63,23 @@ export default {
 </script>
 
 <style lang="scss">
+.back-to-top {
+  position: fixed;
+  z-index: 50px;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 50px;
+  box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.5);
+  i {
+    cursor: pointer;
+    font-size: 50px;
+    color: #6558f5;
+    transition: transform 0.3s;
+  }
+  i:active {
+    transform: scale(0.95);
+  }
+}
 .movies-container {
   padding: 50px;
   box-sizing: border-box;
